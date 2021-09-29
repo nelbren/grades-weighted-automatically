@@ -2,7 +2,7 @@
 #
 # grades-weighted-automatically.py
 #
-# v0.0.2 - 2021-09-29 - nelbren@nelbren.com
+# v0.0.3 - 2021-09-29 - nelbren@nelbren.com
 #
 # pip3 install pandas
 #
@@ -33,11 +33,11 @@ def show_notes(f):
         data[key] = value
     data['t2'] = 100
     for index, row in data.iterrows():
-        total = row[1]
+        total, t2 = row[1], 0
         for i in range(len(lp)):
             row[i + 2], total = dist(total, lp[i])
             row[i + 2] = f'{row[i + 2]:.2f}'.zfill(5)
-        t2 = float(row[2]) + float(row[3]) + float(row[4]) + float(row[5])
+            t2 += float(row[i + 2])
         row[1], row[6] = f'{row[1]:.2f}'.zfill(6), f'{t2:.2f}'.zfill(6)
         print(f'{row[0]:>35} {row[1]} | ', end='')
         for i in range(2, 6):
