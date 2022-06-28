@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ grades-weighted-automatically.py - Calcula las calificaciones y las pondera
-    v0.0.4 - 2021-12-21 - nelbren@nelbren.com
+    v0.0.5 - 2022-06-28 - nelbren@nelbren.com
     Modulos requeridos: pip3 install pandas argparse
     Fuente: BB->Centro de califaciones->Trabajar sin conexión->Descargar
             ->OPCIONES: Tipo de delimitador: Coma -> Enviar -> DESCARGAR"""
@@ -25,6 +25,7 @@ def func_conv(nota):
 
 def show_notes(_file):
     """muestra las notas"""
+    TAGS = [ '❌', '✅' ]
     ponderacion = {
         "Ponderación Examen I": 30,
         "Ponderación Examen II": 30,
@@ -48,10 +49,12 @@ def show_notes(_file):
             row[i + 2] = f"{row[i + 2]:.2f}".zfill(5)
             total2 += float(row[i + 2])
         row[1], row[6] = f"{row[1]:.2f}".zfill(6), f"{total2:.2f}".zfill(6)
-        print(f"{row[0]:>35} {row[1]} | ", end="")
+        print(f"{row[0]:>40} {row[1]} |", end="")
         for i in range(2, 6):
-            print(f"+{row[i]}", end="")
-        print(f"= {row[6]}")
+            plus = "+" if i > 2 else ""
+            print(f" {plus} {row[i]}", end="")
+        valido = 1 if row[1] == row[6] else 0
+        print(f" = {row[6]} {TAGS[valido]}")
 
 
 parser = argparse.ArgumentParser(
