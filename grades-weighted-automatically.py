@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ grades-weighted-automatically.py - Calcula las calificaciones y las pondera
-    v0.0.8 - 2023-04-02 - nelbren@nelbren.com
+    v0.0.9 - 2023-04-02 - nelbren@nelbren.com
     Fuente: Canvas->API"""
 
 import os
