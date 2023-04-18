@@ -1,7 +1,12 @@
 # Grades weighted automatically using API of Canvas Instructure
 
-![](grades-weighted-automatically.jpg)
+- ## More information on how this program was developed
 
+  - ### ![](https://nelbren.com/assets/images/language/en_tiny.png) [Automatically weighted grades and ChatGPT](https://nelbren.com/en/blackboard/canvas/chatgpt/grades-weighted-automatically_and_ChatGPT/)
+  - ### ![](https://nelbren.com/assets/images/language/es_tiny.png) [Calificaciones ponderadas automáticamente y ChatGPT](https://nelbren.com/es/blackboard/canvas/chatgpt/grades-weighted-automatically_and_ChatGPT/)
+
+- ## Output example
+  ![](grades-weighted-automatically.jpg)
 
 1. ## Get your API_KEY like this:
    - Canvas->Account->Settings->New Access Token->Fill fields of Purpose and Expires->Generate token->Copy the token!
