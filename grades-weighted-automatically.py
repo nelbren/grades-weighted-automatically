@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ grades-weighted-automatically.py - Calcula las calificaciones y las pondera
-    v0.0.9 - 2023-04-02 - nelbren@nelbren.com
+    v0.1.0 - 2023-04-18 - nelbren@nelbren.com
     Fuente: Canvas->API"""
 
 import os
@@ -98,7 +98,10 @@ def get_students(course_id):
         for student in response.json():
             total = get_assignments_by_course_and_user(student['id'], course_id)
             final_score = student['enrollments'][0]['grades']['final_score']
-            real = total * (final_score / 100)
+            if final_score:
+                real = total * (final_score / 100)
+            else:
+                real = 0
             redondeado = Decimal(real).to_integral_value(rounding=ROUND_HALF_UP)
             paso = 0 if redondeado < 60 else 1
             print(f"  {student['name'].upper():>40} {redondeado:>3} {TAGS2[paso]} ", end="")
@@ -106,17 +109,49 @@ def get_students(course_id):
     else:
         print(f'Error: {response}')
 
-def get_courses():
-    """obtiene los cursos"""
-    response = requests.get(f'{base_url}/courses', headers=headers)
+def my_user_id():
+    """obtiene el id del usuario del token"""
+    """No usado por: https://canvas.instructure.com/doc/api/favorites.html"""
+    response = requests.get(f'{base_url}/users/self', headers=headers)
     if response.status_code == 200:
+        return response.json()['id']
+        exit(0)
+    print(f'Error: {response}')
+    exit(1)
+
+def get_courses_favorites():
+    """obtiene los cursos favoritos"""
+    response = requests.get(f'{base_url}/users/self/favorites/courses', headers=headers)
+    if response.status_code == 200:
+        courses = []
         for course in response.json():
-            if course['enrollments'][0]['type'] == 'teacher' and course['workflow_state'] == 'available':
-                print(f"\n{course['name']}\n{len(course['name'])*'-'}")
-                get_students(course['id'])
-        print(end='')
+            courses.append(course)
+        return courses
     else:
         print(f'Error: {response}')
+        exit(1)
+    
+def get_courses_non_favorites():
+    response = requests.get(f'{base_url}/courses', headers=headers)
+    if response.status_code == 200:
+        courses = []
+        for course in response.json():
+            if course['enrollments'][0]['type'] == 'teacher' and course['workflow_state'] == 'available':
+                courses.append(course)
+        return courses
+    else:
+        print(f'Error: {response}')
+        exit(2)
+
+def get_courses():
+    """obtiene los cursos"""
+    courses = get_courses_favorites()
+    if not courses:
+        courses = get_courses_non_favorites()
+    for course in courses:
+        print(f"\n{course['name']}\n{len(course['name'])*'-'}")
+        get_students(course['id'])
+        print(end='')
 
 base_url, api_key = get_params()
 base_url += "/api/v1"
