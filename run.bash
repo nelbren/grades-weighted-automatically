@@ -11,9 +11,9 @@ if [ ! -r my_set_env.bash ]; then
   exit 2
 fi
 source my_set_env.bash
-if ! python -c "import requests" 2>/dev/null; then
-  echo "Please install the modules with: install_requirements.bash"
-  exit 3
-fi
+#if ! python -c "import requests" 2>/dev/null; then
+#  echo "Please install the modules with: install_requirements.bash"
+#  exit 3
+#fi
 
 python3 grades-weighted-automatically.py

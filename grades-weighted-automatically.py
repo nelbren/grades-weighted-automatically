@@ -1,12 +1,19 @@
 #!/usr/bin/python3
 """ grades-weighted-automatically.py - Calcula las calificaciones y las pondera
-    v0.1.0 - 2023-04-18 - nelbren@nelbren.com
+    v0.1.1 - 2024-08-06 - nelbren@nelbren.com
     Fuente: Canvas->API"""
 
 import os
 import sys
 import argparse
-import requests
+try:
+    import requests
+except ModuleNotFoundError:
+    ext = "bash"
+    if os.name == 'nt':
+       ext = "bat"
+    print(f"Please install the modules by running the script: install_requirements.{ext}")
+    sys.exit(3)
 from decimal import Decimal, ROUND_HALF_UP
 
 def dist(total, valor):
