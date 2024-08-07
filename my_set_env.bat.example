@@ -1,2 +1,5 @@
 @set INSTRUCTURE_URL=replace-with-your-INFRASTRUCTURE-URL_and_rename_this_file
 @set API_KEY=replace-with-your-KEY_API_and_rename_this_file
+@set HIDE=0 &REM Show names and rating
+@set HIDE=1 &REM Show only names
+@set HIDE=2 &REM Show only rating

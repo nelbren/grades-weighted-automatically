@@ -1,2 +1,5 @@
 export INSTRUCTURE_URL=replace-with-your-INFRASTRUCTURE-URL_and_rename_this_file
 export API_KEY=replace-with-your-KEY_API_and_rename_this_file
+export HIDE=0 # Show names and rating
+export HIDE=1 # Show only names
+export HIDE=2 # Show only rating
