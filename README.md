@@ -27,16 +27,11 @@
      - #### 🪟 Windows
         **Microsoft Store** -> **`Python 3.12`**
 
-   - ### Make virtual enviroment for Python
-     - #### 🐧Linux, 🍎Mac or 🪟 Windows
-       `python3 -m venv venv`
-
-
-    - ### Install the necessary **python packages**:
+    - ### Install the necessary files:
       - #### 🐧Linux or 🍎Mac
-        `./install_requirements.bash`
+        `./install.bash`
       - #### 🪟 Windows
-        `install_requirements.bat`
+        `install.bat`
 
 4. ## Set your Instructure URL and API_KEY like this:
 

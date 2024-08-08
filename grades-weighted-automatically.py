@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ grades-weighted-automatically.py - Calcula las calificaciones y las pondera
-    v0.1.2 - 2024-08-07 - nelbren@nelbren.com
+    v0.1.3 - 2024-08-07 - nelbren@nelbren.com
     Fuente: Canvas->API"""
 
 import os
@@ -9,10 +9,10 @@ import argparse
 try:
     import requests
 except ModuleNotFoundError:
-    ext = "bash"
+    scriptFile, scriptType = "./install.bash", "script"
     if os.name == 'nt':
-        ext = "bat"
-    print(f"Please install the modules by running the script: install_requirements.{ext}")
+        scriptFile, scriptType = "install.bat", "batch"
+    print(f"\nPlease install the modules by running the {scriptType}: {scriptFile}\n")
     sys.exit(3)
 from decimal import Decimal, ROUND_HALF_UP
 
@@ -142,7 +142,7 @@ def line_student(header = 0):
 
 def get_students(course_id):
     """obtiene los estudiantes del curso"""
-    TAGS2 = ['𐄂 FAIL', '✔ PASS', '≡≡≡≡≡≡']
+    TAGS2 = ['× FAIL', '✓ PASS', '≡≡≡≡≡≡']
     params = {"enrollment_type[]": "student", "include[]": "enrollments", "per_page": "999"}
     response = requests.get(f'{base_url}/courses/{course_id}/users', headers=headers, params=params)
     if response.status_code == 200:
