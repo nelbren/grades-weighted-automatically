@@ -7,7 +7,7 @@ fi
 source venv/bin/activate
 
 if [ ! -r my_set_env.bash ]; then
-  echo "Please make my_set_env.bash! ( ./install.bash )"
+  echo "Please make my_set_env.bash! ( ./config.bash )"
   exit 2
 fi
 
